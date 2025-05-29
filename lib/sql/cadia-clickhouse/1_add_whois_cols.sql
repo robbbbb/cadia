@@ -1,0 +1,21 @@
+-- TODO most of this is wrong and some cols are not applied in the db. correct/remove it
+ALTER TABLE cadia.domains
+ADD COLUMN `registrant_name` Nullable(String),
+ADD COLUMN `registrant_organization` Nullable(String),
+ADD COLUMN `registrant_stateprovince` Nullable(String),
+ADD COLUMN `registrant_country` Nullable(String),
+ADD COLUMN `registrant_phone` Nullable(String),
+ADD COLUMN `registrant_email` Nullable(String),
+ADD COLUMN `tech_name` Nullable(String),
+ADD COLUMN `tech_organization` Nullable(String),
+ADD COLUMN `tech_stateprovince` Nullable(String),
+ADD COLUMN `tech_country` Nullable(String),
+ADD COLUMN `tech_phone` Nullable(String),
+ADD COLUMN `tech_email` Nullable(String),
+ADD COLUMN `admin_name` Nullable(String),
+ADD COLUMN `admin_organization` Nullable(String),
+ADD COLUMN `admin_stateprovince` Nullable(String),
+ADD COLUMN `admin_country` Nullable(String),
+ADD COLUMN `admin_phone` Nullable(String),
+ADD COLUMN `admin_email` Nullable(String),
+ADD COLUMN `status` Array(String);

@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}errors{% endblock %} {% block body %}
+<table class="table">
+  <tr>
+    <th>Uuid</th>
+    <th>Domains</th>
+    <th>Error type</th>
+    <th>Scraper</th>
+    <th>File</th>
+    <th>Line</th>
+    <th>Topic</th>
+    <th>Count</th>
+    <th>Latest</th>
+  </tr>
+  {% for row in errors %}
+  <tr>
+    <td>
+      {% for uuid in row.uuids%}
+      <a href="{{url_for('error_details', uuid=uuid)}}">{{ uuid }}</a><br />
+      {% endfor %}
+    </td>
+    <td>{% for domain, uuid in row.domains|zip(row.uuids) %}
+      <a href="{{url_for('error_details', uuid=uuid)}}">{{ domain }}</a><br />
+      {% endfor %}
+    </td>
+    <td>{{ row.error_type }}</td>
+    <td>{{ row.scraper }}</td>
+    <td>{{ row.file }}</td>
+    <td>{{ row.line }}</td>
+    <td>{{ row.topic }}</td>
+    <td>{{ row.count }}</td>
+    <td>{{ row.latest }}</td>
+    {% endfor %}
+  </tr>
+</table>
+
+{% endblock %} {% block bottom %} {% endblock %}

@@ -1,0 +1,14 @@
+stages:
+  - syntax_check
+  - build
+  - deploy
+
+variables:
+  RD_DEPLOY_WEB_CLUSTER: php8-internal
+  RELOAD_APACHE_ALWAYS: true
+
+
+include:
+  - project: 'ops/gitlab-ci-templates'
+    file:
+      - 'website.yml'

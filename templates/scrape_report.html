@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}scrape report{% endblock %}
+{% block body %}
+  <div class="row">
+  <div class="col12">
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Never</th>
+        <th>90+ days</th>
+        <th>60 - 90 days</th>
+        <th>30 - 60 days</th>
+        <th>7 - 30 days</th>
+	<th>&lt 7 days</th>
+      </tr>
+      <tr>
+	<th>DNS</th>
+	<td>{{results.dns_scraped_never}}</td>
+	<td>{{results.dns_scraped_gt_90}}</td>
+	<td>{{results.dns_scraped_60_90}}</td>
+	<td>{{results.dns_scraped_30_60}}</td>
+	<td>{{results.dns_scraped_30_7}}</td>
+	<td>{{results.dns_scraped_lt_7}}</td>
+      </tr>
+      <tr>
+	<th>Whois/RDAP</th>
+	<td>{{results.whois_scraped_never}}</td>
+	<td>{{results.whois_scraped_gt_90}}</td>
+	<td>{{results.whois_scraped_60_90}}</td>
+	<td>{{results.whois_scraped_30_60}}</td>
+	<td>{{results.whois_scraped_30_7}}</td>
+	<td>{{results.whois_scraped_lt_7}}</td>
+      </tr>
+    </table>
+  </div>
+  </div>
+{% endblock %}

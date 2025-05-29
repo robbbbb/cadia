@@ -1,0 +1,2 @@
+# Import pm owner data to cadia weekly
+21 3 * * 0 import runjob --mail=rt-cadia@trellian.com --memory=8000 --tag=cadia:pm -- python3 /var/www/cadia.trillion.com/pm.py

@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% macro filter_badge(col, value, text=value) %}
+<span class="badge bg-light text-dark border me-1"><a href="#" class="text-reset text-decoration-none" onclick="add_filter('{{col}}','{{value}}');">{{text}}</a></span>
+{% endmacro %}
+{% block title %}results{% endblock %}
+{% block body %}
+<div id="progress-container"
+     hx-get="/s/{{ search.id }}/progress_log"
+     hx-trigger="load"
+     hx-swap="innerHTML">
+</div>
+{% endblock %}
+{% block bottom %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<form id="add-filter" action="/s/{{search.id}}/filter" method="post" style="display:none"><input name="col" id="add-filter-col" style="display:none"><input name="match" id="add-filter-match" value="exact" style="display:none"><input name="value" id="add-filter-value" style="display:none"></form>
+<script>
+function el(id) { return document.getElementById(id); }
+function qs(q) { return document.querySelector(q); }
+function qsall(q) { return document.querySelectorAll(q); }
+
+function add_filter(col,value) {
+	// TODO keep pagination
+	// send POST request. uses the hidden form above. there's probably a better way to do this
+	el("add-filter-col").setAttribute('value', col);
+	el("add-filter-value").setAttribute('value', value);
+	el("add-filter").submit();
+	return false;
+}
+
+var current_tab='col-default';
+function show_cols(cls) {
+	if (typeof cls == 'undefined' ) {
+		// if no arg use the current tab. keeps on the same tab when sorting or paginating
+		cls = current_tab;
+	}
+	// hide/show table columns
+	// finds which TH have the matching class then hides all TDs in those columns
+	qsall('#results-table th').forEach( (th, col_no) => {
+		if (th.classList.contains('col-fixed')) {
+			return;
+		}
+		var show = th.classList.contains(cls);
+		var rows = el('results-table').rows;
+
+		for (var row = 0; row < rows.length; row++) {
+			var cols = rows[row].cells;
+			cols[col_no].style.display = show ? '' : 'none';
+		}
+	});
+
+	// update the active tab
+	qsall('#tabs .nav-link').forEach( tab => {
+		//console.log(tab);
+		//console.log(tab.classList);
+
+		if (tab.classList.contains(cls)) {
+			tab.classList.add('active');
+		} else {
+			tab.classList.remove('active')
+		}
+	});
+
+	current_tab = cls;
+}
+
+
+htmx.onLoad( function(el) {
+	show_cols();
+	charts = qsall('.chart');
+	charts.forEach( ctx => show_chart(ctx) );
+});
+
+
+function show_chart(ctx) {
+	// delete any chart already attached to that canvas id
+	ch = Chart.getChart(ctx.id);
+	if (ch != undefined) {
+		ch.destroy();
+	}
+
+	points = eval(ctx.getAttribute('data-points'));
+	is_bigchart = ctx.classList.contains('bigchart');
+	//console.log(is_bigchart);
+
+	new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+			datasets: [{
+				label: 'Monthly visits',
+				data: points,
+				borderWidth: 1.5,
+				fill: 'origin',
+				pointRadius: 1 // 0=hide points
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true,
+					display: is_bigchart,
+					title: { text : "visits per month", display: is_bigchart }
+				},
+				x: {
+					display: is_bigchart,
+					ticks: { display: is_bigchart },
+					grid: { display: false }
+
+				}
+			},
+			plugins: {
+				legend : {
+					display: false 
+				},
+				tooltip : {
+					enabled: is_bigchart
+				}
+			}
+		},
+	});
+};
+
+
+function copy_domain() {
+    const id = el("copyDomain").getAttribute("data-id");
+    el("copyDomain").classList.add("disabled")
+    el("copyDomain").innerHTML = '<span class="spinner-border spinner-border-sm"></span> Loading...'
+    fetch("/s/" + id + "/copy_domain", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        el("copyDomain").classList.remove("disabled")
+        const domains = data.map((row) => row).join("\n");
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(domains).then(
+            function () {
+              //alert("Domains copied to clipboard");
+              // Show tick for a second then change label back
+              el("copyDomain").innerHTML = '<i class="bi bi-check"></i>'
+              setTimeout(() => {
+	        el("copyDomain").innerHTML = "Copy Domains"
+	      }, 1000)
+            },
+            function (err) {
+              console.error("Could not copy text: ", err);
+              alert("Error copying domains");
+              el("copyDomain").innerHTML = "Copy Domains"
+            }
+          );
+        } else {
+          // Fallback for browsers that do not support the Clipboard API
+          const textarea = document.createElement("textarea");
+          textarea.value = domains;
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand("copy");
+            //alert("Domains copied to clipboard");
+            // Show tick for a second then change label back
+            el("copyDomain").innerHTML = '<i class="bi bi-check"></i>'
+            setTimeout(() => {
+	      el("copyDomain").innerHTML = "Copy Domains"
+	    }, 1000)
+          } catch (err) {
+            console.error("Fallback: Oops, unable to copy", err);
+            alert("Error copying domains");
+            el("copyDomain").innerHTML = "Copy Domains"
+          }
+          document.body.removeChild(textarea);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching results:", error);
+        alert("Error copying domains");
+      });
+  };
+
+
+
+ 
+  document.addEventListener("DOMContentLoaded", function() {
+    // Function to manually trigger HTMX request
+    function pollProgress() {
+      const container = document.querySelector('#progress-container');
+      if (!container) return;
+
+      // Manually trigger the HTMX request
+      htmx.ajax('GET', container.getAttribute('hx-get'), {target: container});
+
+      setTimeout(() => {
+        const done = container.querySelector('#progress-complete-flag');
+        if (!done) {
+          pollProgress();
+        } else {
+          console.log('Polling stopped: progress complete');
+        }
+      }, 1000);  // Poll every 1 seconds
+    }
+
+    // Start the polling
+    pollProgress();
+  });
+
+</script>
+{% endblock %}

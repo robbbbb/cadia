@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}chart{% endblock %}
+{% block body %}
+  <div class="row">
+  <div class="col12">
+    <canvas height="400" width="1000" class="chart bigchart" id="disect-chart" data-points="{{ datapoints }}" onload="show_chart(this);"></canvas>
+    <ul id="contextMenu" class="dropdown-menu" style="display:none; position:absolute;">
+    <li><h6 class="dropdown-header" id="menu-heading">Options for ({{col}} is {{value}}):</h6></li>
+    <li><a class="dropdown-item" id="menu-add-filter" href="/s/{{search.id}}/filter?col={{col}}&match=exact&value={{value}}"><i class="bi bi-funnel me-2"></i> Drill down</a></li>
+    <li><a class="dropdown-item" id="menu-new-search" href="/s/new?col={{col}}&match=exact&value={{value}}" target="_blank"><i class="bi bi-file-earmark-plus me-2"></i> Start a new search</a></li>
+    </ul>
+  </div>
+  </div>
+{% endblock %}
+{% block bottom %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function el(id) { return document.getElementById(id); }
+function qs(q) { return document.querySelector(q); }
+function qsall(q) { return document.querySelectorAll(q); }
+htmx.onLoad( function(el) {
+	charts = qsall('.chart');
+	charts.forEach( ctx => show_chart(ctx) );
+});
+function show_chart(ctx) {
+	// delete any chart already attached to that canvas id
+	ch = Chart.getChart(ctx.id);
+	if (ch != undefined) {
+		ch.destroy();
+	}
+
+	points = eval(ctx.getAttribute('data-points'));
+	is_bigchart = ctx.classList.contains('bigchart');
+	//console.log(is_bigchart);
+
+	new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: {{ labels|safe }},
+			datasets: [{
+				label: 'Domains',
+				data: points,
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					display: is_bigchart,
+					title: { text : "domains", display: is_bigchart },
+					type: 'logarithmic'
+				},
+				x: {
+					display: is_bigchart,
+					title: { text : "{{col}}", display: is_bigchart }
+				}
+			},
+			plugins: {
+				legend : {
+					display: false 
+				},
+				tooltip : {
+					enabled: is_bigchart
+				}
+			},
+			onClick: (event, elements, chart) => {
+				//console.log("Click!");
+				//console.log(event);
+				//console.log(elements);
+				//console.log(chart);
+				index = elements[0].index;
+				label = chart.data.labels[index];
+				var BB = chart.canvas.getBoundingClientRect(),
+				offsetX = BB.left,
+				offsetY = BB.top;
+				menu = el('contextMenu');
+				var x = parseInt(event.x + offsetX);
+				var y = parseInt(event.y + offsetY);
+				console.log(x);
+				console.log(y);
+				menu.style.left = x + 'px';
+				menu.style.top = y + 'px';
+				menu.style.display = 'block';
+				menu.style.zIndex = 100;
+				menu = el('contextMenu');
+				console.log(menu)
+				col = '{{col}}'
+				el('menu-heading').innerHTML = "Options for (" + col + " is " + label + ")"
+				el('menu-add-filter').href="/s/{{search.id}}/filter?col="+col+"&match=exact&value=" + label
+				el('menu-new-search').href = "/s/new?col="+col+"&match=exact&value=" + label
+				return false;
+			}
+		},
+	});
+};
+</script>
+{% endblock %}

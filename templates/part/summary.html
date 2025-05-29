@@ -1,0 +1,19 @@
+{% from "macros.html" import filter_badge, tag_badge %}
+<div class="col-3">
+	{% if tag %}
+	{{ tag_badge(tag.id, tag.name, tag.colour, tag.icon) }}
+	{% endif %}
+	<p class="lead">{{ summary.count|format_number }} <span class="text-muted">domains</span><br>
+	{{ summary.visits_12m|format_number }} <span class="text-muted">visits in last 12m</span><br>
+	</p>
+	<p>
+	<span class="text-muted">Fetched {{timestamp}}</span> <a href="{{url_for('refresh', id=search.id)}}"><i class="bi bi-arrow-clockwise"></i></a>
+	</p>
+	<p>
+Status: {% for registered, count in summary.registered %}
+{{ count }}  {% if registered == None %}Unknown{% elif registered %}Registered{% else %}Available{% endif %},
+{% endfor %}</p>
+</div>
+<div class="col-9">
+    <canvas height="60" width="500" class="chart bigchart" id="summary-chart" data-points="{{ summary.visits_arr_12m }}" onload="show_chart(this);">
+</div>

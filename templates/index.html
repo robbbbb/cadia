@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}index{% endblock %}
+{% block body %}
+  <div class="row">
+  <div class="col12">
+	  <p class="lead">Start your search here:
+<!-- TODO copied from part/search-menu.html. should make this form a reusable part -->
+<form action="/s/new" method="post" class="m-2" id="add-criteria-form">
+  <!-- Column Select -->
+  <select class="form-select" name="col" id="select-col" onchange="select_col_change()">
+    <option>domain</option>
+    <option>ns</option>
+    <option>ns_domains</option>
+    <option>tld</option>
+    <option>registered</option>
+    <option>registrar_id</option>
+    <option>addr</option>
+    <option>mx</option>
+    <option>txt</option>
+    <option>pm_username</option>
+  </select>
+
+  <!-- Match Select -->
+  <select class="form-select" name="match" id="match">
+    <option>exact</option>
+    <option>not</option>
+    <option>startswith</option>
+    <option>substring</option>
+  </select>
+
+  <!-- Value Input -->
+  <input class="form-control" type="text" name="value" id="value-str" placeholder="search...">
+
+  <!-- Boolean Select (Hidden by Default) -->
+  <select name="value-bool" id="value-bool">
+    <option>true</option>
+    <option>false</option>
+  </select>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary" onclick="search_submit()">Submit</button>
+</form>
+</li>
+<script>
+function select_col_change() {
+  const col = document.getElementById("select-col").value;
+
+  const valueStr = document.getElementById("value-str");
+  const match = document.getElementById("match");
+  const valueBool = document.getElementById("value-bool");
+
+  if (col === 'registered') {
+    // boolean column selected
+    valueStr.style.display = 'none';
+    match.style.display = 'none';
+    valueBool.style.display = 'block'; 
+  } else {
+    valueStr.style.display = 'block';
+    match.style.display = 'block';
+    valueBool.style.display = 'none';
+  }
+}
+function search_submit() {
+	// the backend uses the "value" field. copy the value into that when needed
+	col = document.getElementById("select-col").value;
+	if (col == 'registered') {
+		document.getElementById("value-str").value = document.getElementById("value-bool").value
+	}
+}
+</script>
+<!-- end "copied from" -->
+</p>
+	  <hr/>
+	  <p class="lead">Example searches to get you started:</p>
+	  <ul>
+
+		  <li><a href="/preset/available">Available</a> - domains we know are available (not currently registered)</li>
+		  <li><a href="/preset/google">google.*</a> - domains starting with google.*</li>
+		  <li><a href="/preset/trellianmx">Trellian MX</a> - domains with MX record "mx.trellian.com"</li>
+	  </ul>
+	  <p>Also See the "Examples" menu in the top navigation bar.</p>
+
+
+
+
+  </div>
+  </div>
+
+    <style>
+    /* Custom CSS to set form width and inline layout */
+    #add-criteria-form {
+      width: 500px;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 8px; /* Space between form elements */
+    }
+    #add-criteria-form select,
+    #add-criteria-form input {
+      flex: 1 1 auto; /* Allow elements to grow and shrink */
+      min-width: 200px; /* Minimum width for form elements */
+    }
+    #value-bool {
+      display: none; /* Hide the boolean dropdown by default */
+    }
+  </style>
+  
+{% endblock %}

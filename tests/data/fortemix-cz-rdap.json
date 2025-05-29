@@ -1,0 +1,279 @@
+{
+  "objectClassName": "domain",
+  "rdapConformance": [
+    "rdap_level_0",
+    "fred_version_0"
+  ],
+  "handle": "fortemix.cz",
+  "ldhName": "fortemix.cz",
+  "links": [
+    {
+      "value": "https://rdap.nic.cz/domain/fortemix.cz",
+      "rel": "self",
+      "href": "https://rdap.nic.cz/domain/fortemix.cz",
+      "type": "application/rdap+json"
+    }
+  ],
+  "port43": "whois.nic.cz",
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "2005-06-07T00:35:00+00:00"
+    },
+    {
+      "eventAction": "expiration",
+      "eventDate": "2025-06-06T22:00:00+00:00"
+    },
+    {
+      "eventAction": "last changed",
+      "eventDate": "2019-11-29T13:23:23+00:00"
+    },
+    {
+      "eventAction": "transfer",
+      "eventDate": "2017-02-08T14:44:06+00:00"
+    }
+  ],
+  "entities": [
+    {
+      "objectClassName": "entity",
+      "handle": "SUB-983896",
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/entity/SUB-983896",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/entity/SUB-983896",
+          "type": "application/rdap+json"
+        }
+      ]
+    },
+    {
+      "objectClassName": "entity",
+      "handle": "REG-GRANSY",
+      "roles": [
+        "registrar"
+      ]
+    },
+    {
+      "objectClassName": "entity",
+      "handle": "SUB-983896",
+      "roles": [
+        "administrative"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/entity/SUB-983896",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/entity/SUB-983896",
+          "type": "application/rdap+json"
+        }
+      ]
+    }
+  ],
+  "status": [
+    "active"
+  ],
+  "nameservers": [
+    {
+      "objectClassName": "nameserver",
+      "handle": "ns2.gransy.com",
+      "ldhName": "ns2.gransy.com",
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/nameserver/ns2.gransy.com",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/nameserver/ns2.gransy.com",
+          "type": "application/rdap+json"
+        }
+      ]
+    },
+    {
+      "objectClassName": "nameserver",
+      "handle": "ns3.gransy.com",
+      "ldhName": "ns3.gransy.com",
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/nameserver/ns3.gransy.com",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/nameserver/ns3.gransy.com",
+          "type": "application/rdap+json"
+        }
+      ]
+    },
+    {
+      "objectClassName": "nameserver",
+      "handle": "ns4.gransy.com",
+      "ldhName": "ns4.gransy.com",
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/nameserver/ns4.gransy.com",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/nameserver/ns4.gransy.com",
+          "type": "application/rdap+json"
+        }
+      ]
+    },
+    {
+      "objectClassName": "nameserver",
+      "handle": "ns5.gransy.com",
+      "ldhName": "ns5.gransy.com",
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/nameserver/ns5.gransy.com",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/nameserver/ns5.gransy.com",
+          "type": "application/rdap+json"
+        }
+      ]
+    },
+    {
+      "objectClassName": "nameserver",
+      "handle": "ns.gransy.com",
+      "ldhName": "ns.gransy.com",
+      "links": [
+        {
+          "value": "https://rdap.nic.cz/nameserver/ns.gransy.com",
+          "rel": "self",
+          "href": "https://rdap.nic.cz/nameserver/ns.gransy.com",
+          "type": "application/rdap+json"
+        }
+      ]
+    }
+  ],
+  "fred_nsset": {
+    "objectClassName": "fred_nsset",
+    "handle": "NSS:GRANSY:3",
+    "links": [
+      {
+        "value": "https://rdap.nic.cz/fred_nsset/NSS:GRANSY:3",
+        "rel": "self",
+        "href": "https://rdap.nic.cz/fred_nsset/NSS:GRANSY:3",
+        "type": "application/rdap+json"
+      }
+    ],
+    "nameservers": [
+      {
+        "objectClassName": "nameserver",
+        "handle": "ns2.gransy.com",
+        "ldhName": "ns2.gransy.com",
+        "links": [
+          {
+            "value": "https://rdap.nic.cz/nameserver/ns2.gransy.com",
+            "rel": "self",
+            "href": "https://rdap.nic.cz/nameserver/ns2.gransy.com",
+            "type": "application/rdap+json"
+          }
+        ]
+      },
+      {
+        "objectClassName": "nameserver",
+        "handle": "ns3.gransy.com",
+        "ldhName": "ns3.gransy.com",
+        "links": [
+          {
+            "value": "https://rdap.nic.cz/nameserver/ns3.gransy.com",
+            "rel": "self",
+            "href": "https://rdap.nic.cz/nameserver/ns3.gransy.com",
+            "type": "application/rdap+json"
+          }
+        ]
+      },
+      {
+        "objectClassName": "nameserver",
+        "handle": "ns4.gransy.com",
+        "ldhName": "ns4.gransy.com",
+        "links": [
+          {
+            "value": "https://rdap.nic.cz/nameserver/ns4.gransy.com",
+            "rel": "self",
+            "href": "https://rdap.nic.cz/nameserver/ns4.gransy.com",
+            "type": "application/rdap+json"
+          }
+        ]
+      },
+      {
+        "objectClassName": "nameserver",
+        "handle": "ns5.gransy.com",
+        "ldhName": "ns5.gransy.com",
+        "links": [
+          {
+            "value": "https://rdap.nic.cz/nameserver/ns5.gransy.com",
+            "rel": "self",
+            "href": "https://rdap.nic.cz/nameserver/ns5.gransy.com",
+            "type": "application/rdap+json"
+          }
+        ]
+      },
+      {
+        "objectClassName": "nameserver",
+        "handle": "ns.gransy.com",
+        "ldhName": "ns.gransy.com",
+        "links": [
+          {
+            "value": "https://rdap.nic.cz/nameserver/ns.gransy.com",
+            "rel": "self",
+            "href": "https://rdap.nic.cz/nameserver/ns.gransy.com",
+            "type": "application/rdap+json"
+          }
+        ]
+      }
+    ]
+  },
+  "secureDNS": {
+    "zoneSigned": true,
+    "delegationSigned": true,
+    "keyData": [
+      {
+        "flags": 256,
+        "protocol": 3,
+        "algorithm": 7,
+        "publicKey": "BQEAAAAB9QdSKCeptWzBV1tlAFU+AaiSGgU7XaUY6YHgtUQ1ggPvJAplv3N9Xt8vB+z7/FThK4gxzQ3xZ+Y0xZ0sEnQVdl05XTfrrOGjwr6x3PwxwepWONVZ6FXDb+LhEFx95kYOIjhLnyr5UvOHu9vFOEu1mMENo9gdg00DMBX+tXNBxiHIXzsFUE90QmXBro2GH4EHqTX+4ZVuNCOFhzAnp3h+O7SQTR8npmdRrmWJvC42uT6ODGEFOnstZ+vJDQnc3ZLvzJvuaXK9pUGJmIQ75MEs9xcngf7JXRmW/FqsTph0ZcAXUoad8+Tu43Z0+V1Znf7WtCfODqqjKsKklt7CdY7R6NzEV9b5F//rvG88wZeg+PKXNVbQFFSzyguEsFrvjrTThdKjyDPfbMRl/vMeoB/dfnB1VP5Ds1zMpqqYqiPPVLBmCjuRC2EalK3tPh3y9U2xE+A2vytXETew+T+nX9ZG62rS7YnKwsMYrSzUPDTXYgCVwsDM/2Ecl5XEpemOnTvMmQGh7LUuYs/kK2hImPew5ntAQC6jnGr37xC3xtBfkFQN4sV5iSOvZWs5mjP2iEhGEFl5fRqU0Zvck0vOCHBBU0oRj8k4VUpUKSFe2W4iKolj2VS9Jr7S5WIFGFMHUfhyC1j5FVAqSyLBnEKOWper3O+dMQrtWTRl5L1H7v96O/E="
+      },
+      {
+        "flags": 257,
+        "protocol": 3,
+        "algorithm": 7,
+        "publicKey": "BQEAAAABw0H2Xb7JjIuMMVRD3oqWpoXsriUK4sCT2B0TAc9b6v7K+gEIfhtrQ+LImQ/yY4VLZ1z88RDe48LvV2kA3fjB+4tFJTsgmgxCAg29skRNorVLnb6ztSqZO3FuTYgH3yywEw3W4rTkPfthNhiaMEVXVrFDDU4dGhiJmvIa9mkaPOkIKeRV4gJqs2YSEIhCKeMxkNNGLn1CIXAiFjVbVDcYFv0n1bBY2iDUllDIRZapMfoSwJMnHI6VXz3CGjxIfcFcr+BUfVFhobqyV848n4HJcHKMgErtC8xFmRD++Pq/isLbNs48zDSZQY5jJvD30anwzZnzhWJJ2ZlirUm6pIazB3a6A7V3c381TsRAyY8suy5pkEriSVs4wSfHkiiwd3Z1sHCTHgefwyRrArFycXR4bvz9sSFOCjbZfJ4S2RFchQa2D+IJsea+kXa+LGOi2enMd6Jaq5+WB6dUkgWz+9a0/xqCC2ShywyWeazuoLaaejL8NUDfsGj4TEHfkXX+/BodFl6SicWsQEZuNU44/+pyyFqgDKsHu9t8mDtz/IGRZ/Duj9GKTQ4j953Czkic0thvFwqqd6Xm+C48K1qIB1vWqV4AinXDVf/qjbkPxGP01P+riUs5E0zTEoJOtyTtm/xoV5lTwe2PvhysrtGmcTdyqZXDZ6DQnUgkO7BUjlprbnk="
+      }
+    ],
+    "maxSigLife": 1209600
+  },
+  "fred_keyset": {
+    "objectClassName": "fred_keyset",
+    "handle": "AUTO-5C8G8WXPRZ1TXF7DUY06WRX3O",
+    "links": [
+      {
+        "value": "https://rdap.nic.cz/fred_keyset/AUTO-5C8G8WXPRZ1TXF7DUY06WRX3O",
+        "rel": "self",
+        "href": "https://rdap.nic.cz/fred_keyset/AUTO-5C8G8WXPRZ1TXF7DUY06WRX3O",
+        "type": "application/rdap+json"
+      }
+    ],
+    "dns_keys": [
+      {
+        "flags": 256,
+        "protocol": 3,
+        "algorithm": 7,
+        "publicKey": "BQEAAAAB9QdSKCeptWzBV1tlAFU+AaiSGgU7XaUY6YHgtUQ1ggPvJAplv3N9Xt8vB+z7/FThK4gxzQ3xZ+Y0xZ0sEnQVdl05XTfrrOGjwr6x3PwxwepWONVZ6FXDb+LhEFx95kYOIjhLnyr5UvOHu9vFOEu1mMENo9gdg00DMBX+tXNBxiHIXzsFUE90QmXBro2GH4EHqTX+4ZVuNCOFhzAnp3h+O7SQTR8npmdRrmWJvC42uT6ODGEFOnstZ+vJDQnc3ZLvzJvuaXK9pUGJmIQ75MEs9xcngf7JXRmW/FqsTph0ZcAXUoad8+Tu43Z0+V1Znf7WtCfODqqjKsKklt7CdY7R6NzEV9b5F//rvG88wZeg+PKXNVbQFFSzyguEsFrvjrTThdKjyDPfbMRl/vMeoB/dfnB1VP5Ds1zMpqqYqiPPVLBmCjuRC2EalK3tPh3y9U2xE+A2vytXETew+T+nX9ZG62rS7YnKwsMYrSzUPDTXYgCVwsDM/2Ecl5XEpemOnTvMmQGh7LUuYs/kK2hImPew5ntAQC6jnGr37xC3xtBfkFQN4sV5iSOvZWs5mjP2iEhGEFl5fRqU0Zvck0vOCHBBU0oRj8k4VUpUKSFe2W4iKolj2VS9Jr7S5WIFGFMHUfhyC1j5FVAqSyLBnEKOWper3O+dMQrtWTRl5L1H7v96O/E="
+      },
+      {
+        "flags": 257,
+        "protocol": 3,
+        "algorithm": 7,
+        "publicKey": "BQEAAAABw0H2Xb7JjIuMMVRD3oqWpoXsriUK4sCT2B0TAc9b6v7K+gEIfhtrQ+LImQ/yY4VLZ1z88RDe48LvV2kA3fjB+4tFJTsgmgxCAg29skRNorVLnb6ztSqZO3FuTYgH3yywEw3W4rTkPfthNhiaMEVXVrFDDU4dGhiJmvIa9mkaPOkIKeRV4gJqs2YSEIhCKeMxkNNGLn1CIXAiFjVbVDcYFv0n1bBY2iDUllDIRZapMfoSwJMnHI6VXz3CGjxIfcFcr+BUfVFhobqyV848n4HJcHKMgErtC8xFmRD++Pq/isLbNs48zDSZQY5jJvD30anwzZnzhWJJ2ZlirUm6pIazB3a6A7V3c381TsRAyY8suy5pkEriSVs4wSfHkiiwd3Z1sHCTHgefwyRrArFycXR4bvz9sSFOCjbZfJ4S2RFchQa2D+IJsea+kXa+LGOi2enMd6Jaq5+WB6dUkgWz+9a0/xqCC2ShywyWeazuoLaaejL8NUDfsGj4TEHfkXX+/BodFl6SicWsQEZuNU44/+pyyFqgDKsHu9t8mDtz/IGRZ/Duj9GKTQ4j953Czkic0thvFwqqd6Xm+C48K1qIB1vWqV4AinXDVf/qjbkPxGP01P+riUs5E0zTEoJOtyTtm/xoV5lTwe2PvhysrtGmcTdyqZXDZ6DQnUgkO7BUjlprbnk="
+      }
+    ]
+  },
+  "notices": [
+    {
+      "title": "Disclaimer",
+      "description": [
+        "(c) 2023 CZ.NIC, z.s.p.o.",
+        "Intended use of supplied data and information",
+        "Data contained in the domain name register, as well as information supplied through public information services of CZ.NIC association, are appointed only for purposes connected with Internet network administration and operation, or for the purpose of legal or other similar proceedings, in process as regards a matter connected particularly with holding and using a concrete domain name."
+      ]
+    }
+  ]
+}

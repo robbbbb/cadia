@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Edit Search{% endblock %}
+{% block body %}
+
+<div class="container mt-5">
+  <h2 class="mb-4">Search Criteria</h2>
+  {% for col, match, value in search.criteria %}
+  <div class="dropdown-item">
+    <a class="text-reset text-decoration-none" href="#" onclick="edit_criteria('{{ col }}', '{{ match }}', '{{ value }}', '{{ loop.index0 }}')">
+      {{ col }} {{ match }} {{ value }} <i class="bi bi-pencil"></i>
+    </a>
+    <a class="text-reset text-decoration-none" href="#" onclick="document.getElementById('remove-{{loop.index0}}').submit(); return false">
+      <i class="bi bi-x-lg"></i>
+    </a>
+    <form id="remove-{{loop.index0}}" action="/s/{{search.id}}/remove-filter/{{loop.index0}}" method="post" style="display:none"></form>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Add / Update Criteria</h2>
+  <a class="btn btn-success mb-3" href="#" onclick="show_add_criteria_form()">Add New Criteria <i class="bi bi-plus-lg"></i></a>
+  <form class="m-2" id="criteria-form" method="post" style="display:none;">
+    <div class="mb-3">
+      <select class="form-select" name="col" id="select-col" onchange="select_col_change()">
+        <option>domain</option>
+        <option>ns</option>
+        <option>ns_domains</option>
+        <option>tld</option>
+        <option>registered</option>
+        <option>registrar_id</option>
+        <option>addr</option>
+        <option>mx</option>
+        <option>txt</option>
+        <option>pm_username</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+      <select class="form-select" name="match" id="match">
+        <option>exact</option>
+        <option>not</option>
+        <option>startswith</option>
+        <option>substring</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="value-str" class="form-label">Search</label>
+      <input type="text" class="form-control" name="value" id="value-str" placeholder="search...">
+    </div>
+
+    <select name="value-bool" id="value-bool" class="form-select" style="display:none">
+      <option>true</option>
+      <option>false</option>
+    </select>
+
+    <input type="hidden" name="criteria-index" id="criteria-index">
+    <div class="d-flex gap-2">
+    <button type="submit" formaction="/s/{{search.id}}/filter" class="btn btn-primary" id="add-criteria-button">Add New Criteria</button>
+    <button type="submit" class="btn btn-primary" id="update-criteria-button" onclick="update_criteria(event)" style="display:none;">Update Criteria</button>
+    <button type="button" class="btn btn-danger" id="cancel-criteria-button" onclick="hide_criteria_form()" style="display:none;">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script>
+function select_col_change() {
+    let col = document.getElementById("select-col").value;
+    if (col === 'registered') {
+        document.getElementById("value-str").style.display = 'none';
+        document.getElementById("match").style.display = 'none';
+        document.getElementById("value-bool").style.display = '';
+    } else {
+        document.getElementById("value-str").style.display = '';
+        document.getElementById("match").style.display = '';
+        document.getElementById("value-bool").style.display = 'none';
+    }
+}
+
+function edit_criteria(col, match, value, index) {
+    document.getElementById("select-col").value = col;
+    document.getElementById("match").value = match;
+    document.getElementById("criteria-index").value = index;
+    
+    if (col === 'registered') {
+        document.getElementById("value-bool").value = value;
+    } else {
+        document.getElementById("value-str").value = value;
+    }
+
+    select_col_change();
+    document.getElementById("criteria-form").style.display = 'block';
+    document.getElementById("add-criteria-button").style.display = 'none';
+    document.getElementById("update-criteria-button").style.display = 'block';
+    document.getElementById("cancel-criteria-button").style.display = 'block';
+}
+
+function update_criteria(event) {
+    event.preventDefault();
+    let form = document.getElementById("criteria-form");
+    let criteriaIndex = document.getElementById("criteria-index").value;
+    let col = document.getElementById("select-col").value;
+
+    if (criteriaIndex === '') {
+        alert("Please select a criteria to update.");
+        return;
+    }
+
+    if (col === 'registered') {
+        document.getElementById("value-str").value = document.getElementById("value-bool").value;
+    }
+
+    form.action = "/s/{{search.id}}/edit";
+    form.submit();
+}
+
+function show_add_criteria_form() {
+    document.getElementById("criteria-form").style.display = 'block';
+    document.getElementById("criteria-index").value = '';
+    document.getElementById("select-col").value = 'domain';
+    document.getElementById("match").value = 'exact';
+    document.getElementById("value-str").value = '';
+    document.getElementById("value-bool").value = 'true';
+    select_col_change();
+    document.getElementById("add-criteria-button").style.display = 'block';
+    document.getElementById("update-criteria-button").style.display = 'none';
+    document.getElementById("cancel-criteria-button").style.display = 'block';
+}
+
+function hide_criteria_form() {
+    document.getElementById("criteria-form").style.display = 'none';
+}
+</script>
+
+<style>
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+</style>
+
+{% endblock %}

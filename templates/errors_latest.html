@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}errors{% endblock %} {% block body %}
+<table class="table">
+  <tr>
+    <th>Uuid</th>
+    <th>Domain</th>
+    <th>Error type</th>
+    <th>Error</th>
+    <th>Scraper</th>
+    <th>File</th>
+    <th>Line</th>
+    <th>Timestamp</th>
+  </tr>
+  {% for row in errors %}
+  <tr>
+    <td><a href="{{url_for('error_details', uuid=row.uuid)}}">{{ row.uuid }}</a></td>
+    <td>{{ row.domain }}</td>
+    <td>{{ row.error_type }}</td>
+    <td>{{ row.error }}</td>
+    <td>{{ row.scraper }}</td>
+    <td>{{ row.file }}</td>
+    <td>{{ row.line }}</td>
+    <td>{{ row.timestamp }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %} {% block bottom %} {% endblock %}

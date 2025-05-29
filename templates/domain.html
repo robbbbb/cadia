@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ domain.domain }}{% endblock %}
+{% block body %}
+<div class="row">
+  <div class="col-2">&nbsp;</div>
+  <div class="col-8">
+	  <h1>Domain details: {{ domain.domain }}</h1>
+	  <table class="table">
+	  {% for key, value in domain.items() %}
+	    <tr>
+	      <td>{{ key }}</td>
+	      <td>{{ value }}</td>
+	    </tr>
+	  {% endfor %}
+	  </table>
+	  
+        <h2>Domain Changes: {{ domain.domain }}</h2>
+
+        {% if history %}
+            {% set sorted_history = history|selectattr('last_modified', 'defined')|sort(attribute='last_modified', reverse=True) %} 
+            {% for entry in sorted_history %}
+                    {% if loop.index0 < sorted_history|length - 1 %}
+			Changed at {{entry.last_modified}} from {{entry.modified_by}}:
+                    {% else %}
+		        First entry at {{entry.last_modified}} from {{entry.modified_by}}:
+	            {% endif %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Before</th>
+                                <th>After</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if loop.index0 < sorted_history|length - 1 %}
+                                {% set prev_entry = sorted_history[loop.index0 + 1] %}
+                                {% for key, value in entry.items() %}
+                                    {% if key not in [ 'last_modified', 'ns_domains' ] and prev_entry.get(key) != value %}
+                                    <tr>
+                                        <td><strong>{{ key }}</strong></td>
+                                        <td>{{ prev_entry.get(key, 'N/A') }}</td>
+                                        <td>{{ value }}</td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                {# First entry, display all fields #}
+                                {% for key, value in entry.items() %}
+                                <tr>
+                                    <td><strong>{{ key }}</strong></td>
+                                    <td>N/A</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info text-center mt-4" role="alert">
+                <h4 class="mb-3">No Changes Yet</h4>
+                <p>No history records available for this domain.</p>
+            </div>
+        {% endif %}
+  </div>
+</div>
+{% endblock %}

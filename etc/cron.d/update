@@ -1,0 +1,5 @@
+# Cadia updater - persistent job
+# Running 2 of these to increase throughput. Could scale up to the kafka topic partition count, currently 12
+# The script doesn't parse args so the 1/2 doesn't do anything except making jobrunner's --noduplicate see them as different
+* * *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=6000 --tag=cadia:update --warningtime=0 -- python3 /var/www/cadia.trillion.com/update.py 1
+* * *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=6000 --tag=cadia:update --warningtime=0 -- python3 /var/www/cadia.trillion.com/update.py 2

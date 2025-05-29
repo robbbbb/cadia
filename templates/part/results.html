@@ -1,0 +1,206 @@
+{% from "macros.html" import filter_badge, tag_badge %}
+{% macro column_header(col, classes, sortable=True, chart=False) %}
+<th class="{{classes}}">{{ col }}
+<br class="d-xxl-none">
+{% if chart %}
+<a href="/s/{{search.id}}/chart/{{col}}" hx-target="body" hx-boost="false" hx-push-url="true"><i class="bi bi-bar-chart-line"></i></a>
+{% endif %}
+{% if sortable %}
+{% if pagination.order_by == col and pagination.order == 'asc' %}
+<a href="#"><i class="bi bi-arrow-down-square-fill"></i></a>
+{% else %}
+<a href="{{path}}?p={{ pagination.change(order_by=col,order='asc',offset=0).to_string() }}"><i class="bi bi-arrow-down-square"></i></a>
+{% endif %}
+{% if pagination.order_by == col and pagination.order == 'desc' %}
+<a href="#"><i class="bi bi-arrow-up-square-fill"></i></a>
+{% else %}
+<a href="{{path}}?p={{ pagination.change(order_by=col,order='desc',offset=0).to_string() }}"><i class="bi bi-arrow-up-square"></i></a>
+{% endif %}
+{% endif %}
+</th>
+{% endmacro %}
+<div class="row">
+	<div class="col-12">
+		<ul class="nav nav-tabs" id="tabs">
+			<li class="nav-item">
+				<a class="nav-link active col-default" aria-current="page" href="javascript:;" onclick="show_cols('col-default');">Default</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link col-dns" href="javascript:;" onclick="show_cols('col-dns');">DNS</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link col-registrant" href="javascript:;" onclick="show_cols('col-registrant');">Registrant</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link col-admin" href="javascript:;" onclick="show_cols('col-admin');">Admin</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link col-tech" href="javascript:;" onclick="show_cols('col-tech');">Tech</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link col-traffic" href="javascript:;" onclick="show_cols('col-traffic');">Traffic</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link col-whois" href="javascript:;" onclick="show_cols('col-whois');">Whois</a>
+			</li>
+			<li class="nav-item mt-1" style="margin-left: .5rem; margin-right: .5rem;">
+				<a class="btn btn-primary btn-sm" href="{{url_for('export_csv', id=search.id)}}">Export</a>
+			</li>
+
+			<li class="nav-item mt-1">
+			<a class="btn btn-primary btn-sm" id="copyDomain" data-id="{{search.id}}" href="javascript:;" onclick="copy_domain()">Copy Domains</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row" hx-boost="true" hx-target="#results" hx-swap="innerHTML show:top transition:true" hx-push-url="false" hx-indicator="#th-spinner">
+	<div class="col-12 table-responsive">
+<div class="position-absolute start-50 spinner-border htmx-indicator" id="th-spinner" role="status"></div>
+<table class="table table-striped table-responsive w-100" id="results-table">
+	<tr>{{ column_header('domain','col-fixed') }}{{ column_header('tags','col-default',sortable=False)}}{{ column_header('registered','col-default') }}
+		{{ column_header('ns','col-dns',chart=True) }}{{ column_header('ns_domains','col-dns col-default',chart=True) }}{{ column_header('addr','col-dns',chart=True) }}{{ column_header('mx','col-dns',chart=True) }}{{ column_header('txt','col-dns',chart=True) }}{{ column_header('asn','col-dns',chart=True) }}{{ column_header('geo','col-dns',chart=True) }}
+		{{ column_header('tld','col-dns',chart=True) }}
+		{{ column_header('status','col-whois',chart=True) }}
+		{{ column_header('registrar_id','col-whois col-default',chart=True) }}{{ column_header('registration_date','col-whois')}}{{ column_header('expiration_date','col-whois')}}{{ column_header('transfer_date','col-whois')}}{{ column_header('last_changed_date','col-whois')}}
+		{{ column_header('registrant_name','col-registrant',chart=True) }}
+		{{ column_header('registrant_phone','col-registrant',chart=True) }}
+		{{ column_header('registrant_email','col-registrant',chart=True) }}
+		{{ column_header('registrant_organization','col-registrant',chart=True) }}
+		{{ column_header('registrant_stateprovince','col-registrant',chart=True) }}
+		{{ column_header('registrant_country','col-registrant',chart=True) }}
+
+		{{ column_header('admin_name','col-admin',chart=True) }}
+		{{ column_header('admin_phone','col-admin',chart=True) }}
+		{{ column_header('admin_email','col-admin',chart=True) }}
+		{{ column_header('admin_organization','col-admin',chart=True) }}
+		{{ column_header('admin_stateprovince','col-admin',chart=True) }}
+		{{ column_header('admin_country','col-admin',chart=True) }}
+
+		{{ column_header('tech_name','col-tech',chart=True) }}
+		{{ column_header('tech_phone','col-tech',chart=True) }}
+		{{ column_header('tech_email','col-tech',chart=True) }}
+		{{ column_header('tech_organization','col-tech',chart=True) }}
+		{{ column_header('tech_stateprovince','col-tech',chart=True) }}
+		{{ column_header('tech_country','col-tech',chart=True) }}
+
+		{{ column_header('visits_12m','col-traffic col-default') }}{{ column_header('hits_12m','col-traffic') }}
+		{{ column_header('pm_username','col-whois col-default',chart=True) }}{{ column_header('pm_added','col-whois') }}{{ column_header('pm_blacklisted','col-whois') }}
+		{{ column_header('hits_geo','col-traffic') }}{{ column_header('pi_rank','col-traffic') }}
+		{{ column_header('last_modified','col-default') }}
+{% for row in results %}
+<tr>
+	<td><a href="/domain/{{ row.domain }}" hx-target="body" hx-push-url="true">{{ row.domain }}</a></td>
+	<td>{% for tag in row.tags %}
+		{{ tag_badge(tag.id, tag.name, tag.colour, tag.icon) }}
+	{% endfor %}
+	</td>
+	<td>
+		{% if row.registered==None %}
+		    <span class="text-muted">Unknown</span>
+		{% else %}
+		    {{ filter_badge('registered',row.registered) }}
+		{% endif %}
+	</td>
+	<td>{% for ns in row.ns %}
+		{{ filter_badge('ns',ns) }}
+	{% endfor %}
+	</td>
+	<td>{% for dom in row.ns_domains %}
+		{{ filter_badge('ns_domains',dom) }}
+	{% endfor %}
+	</td>
+	<td>{% for addr in row.addr %}
+		{{ filter_badge('addr',addr) }}
+	{% endfor %}
+	</td>
+	<td>{% for mx in row.mx %}
+		{{ filter_badge('mx',mx) }}
+	{% endfor %}
+	</td>
+	<td>{% for txt in row.txt %}
+		{{ filter_badge('txt',txt) }}
+	{% endfor %}
+	</td>
+	<td>{% for asn in row.asn %}
+		{{ filter_badge('asn',asn) }}
+	{% endfor %}
+	</td>
+	<td>{% for geo in row.geo %}
+		{{ filter_badge('geo',geo) }}
+	{% endfor %}
+	</td>
+	<td>
+		{{ filter_badge('tld',row.tld) }}
+	</td>
+	<td>{% for s in row.status %}
+		{{ filter_badge('status',s) }}
+	{% endfor %}
+	</td>
+	<td>{{ row.registrar_id }}</td>
+	<td>{{ row.registration_date|format_date }}</td>
+	<td>{{ row.expiration_date|format_date }}</td>
+	<td>{{ row.transfer_date|format_date }}</td>
+	<td>{{ row.last_changed_date|format_date }}</td>
+
+	<td>{{ row.registrant_name }}</td>
+	<td>{{ row.registrant_phone }}</td>
+	<td>{{ row.registrant_email }}</td>
+	<td>{{ row.registrant_organization }}</td>
+	<td>{{ row.registrant_stateprovince }}</td>
+	<td>{{ row.registrant_country }}</td>
+
+	<td>{{ row.admin_name }}</td>
+	<td>{{ row.admin_phone }}</td>
+	<td>{{ row.admin_email }}</td>
+	<td>{{ row.admin_organization }}</td>
+	<td>{{ row.admin_stateprovince }}</td>
+	<td>{{ row.admin_country }}</td>
+
+	<td>{{ row.tech_name }}</td>
+	<td>{{ row.tech_phone }}</td>
+	<td>{{ row.tech_email }}</td>
+	<td>{{ row.tech_organization }}</td>
+	<td>{{ row.tech_stateprovince }}</td>
+	<td>{{ row.tech_country }}</td>
+
+	<td nowrap width=300 align="right">{% if row.visits_12m %}<div style="display:inline-block">{{ row.visits_12m|format_number }}</div><div style="display:inline-block;"><canvas class="chart" id="chart-{{loop.index}}" height="20" width="200" data-points="{{ row.visits_arr_12m }}"></div>{% else %}<span class="text-muted">No stats</span>{% endif %}</td>
+	<td>{{ row.hits_12m|format_number }}</td>
+	<td>{{ row.pm_username }}</td>
+	<td>{{ row.pm_added|format_date }}</td>
+	<td>{{ row.pm_blacklisted|format_date }}</td>
+	<td nowrap>{% if row.hits_geo %}{{ row.hits_geo|truncate(50) }}{% endif %}</td>
+	<td>{{ row.pi_rank }}</td>
+	<td nowrap>{{ row.last_modified|format_date }} <span class="text-muted">({{ row.modified_by }})</span></td>
+</tr>
+{% endfor %}
+</div>
+</table>
+</div>
+</div>
+
+<!-- pagination -->
+<div class="row">
+<nav aria-label="pagination">
+	<ul class="pagination justify-content-center" hx-boost="true" hx-target="#results" hx-swap="innerHTML show:top transition:true" hx-push-url="true" hx-indicator="#pagination-spinner">
+		<li class="page-item {% if pagination.offset == 0 %}disabled{% endif %}">
+			<a class="page-link" href="{{path}}?p={{ pagination.previous_page().to_string() }}" aria-label="Previous" hx-target="#results">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		{% for page in pagination.pages() %}
+		{% if page==None %}
+		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+		{% else %}
+		<li class="page-item{%if page[2]%} active{%endif%}"><a class="page-link" href="{{path}}?p={{ pagination.change(offset=page[1]).to_string() }}">{{ page[0] }}</a></li>
+		{% endif %}
+		{% endfor %}
+		<li class="page-item">
+			<a class="page-link" href="{{path}}?p={{ pagination.next_page().to_string() }}" aria-label="Next" hx-target="#results">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+<div class="position-absolute start-50 spinner-border htmx-indicator" id="pagination-spinner" role="status"></div>
+</div>
+</div>

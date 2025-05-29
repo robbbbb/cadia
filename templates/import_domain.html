@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Upload domain{% endblock %} {% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">Upload CSV File</div>
+            <div class="card-body">
+                <form method="post" action="/import_domain" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" name="csvFile" id="csvFile" accept=".csv" required> <!-- Added name="csvFile" -->
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Upload</button>
+                </form>
+            </div>
+        </div>
+        {% if content|length != 0 %}
+        Inserted valid domains: {{valid_domain}}<br>
+        Invalid domains: {{invalid_domain}}<br>
+        {% endif %}
+        <p>
+
+        </p>
+    </div>
+{% endblock %} {% block bottom %} {% endblock %}

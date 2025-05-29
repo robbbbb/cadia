@@ -1,0 +1,85 @@
+Domain Name: techstartups.us
+Registry Domain ID: DE8A461803A804581B4899887078D96FE-NSR
+Registrar WHOIS Server: whois.dynadot.com
+Registrar URL: https://www.dynadot.com/
+Updated Date: 2024-07-25T07:29:26Z
+Creation Date: 2020-07-15T12:34:23Z
+Registry Expiry Date: 2025-07-15T12:34:23Z
+Registrar: Dynadot Inc
+Registrar IANA ID: 472
+Registrar Abuse Contact Email: abuse@dynadot.com
+Registrar Abuse Contact Phone: +1.6502620100
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Registry Registrant ID: C0F2BF58D0045496F964DF8FA1E89754E-NSR
+Registrant Name: Dennis Maximo
+Registrant Organization:
+Registrant Street: 942 Ramble Run Road
+Registrant Street: Middle River
+Registrant Street:
+Registrant City: Baltimore
+Registrant State/Province: MD
+Registrant Postal Code: 21220
+Registrant Country: US
+Registrant Phone: +1.8188135300
+Registrant Phone Ext:
+Registrant Fax:
+Registrant Fax Ext:
+Registrant Email: domain@exclusivenegotiator.com
+Registrant Application Purpose: P3
+Registrant Nexus Category: C11
+Registry Admin ID: C0F2BF58D0045496F964DF8FA1E89754E-NSR
+Admin Name: Dennis Maximo
+Admin Organization:
+Admin Street: 942 Ramble Run Road
+Admin Street: Middle River
+Admin Street:
+Admin City: Baltimore
+Admin State/Province: MD
+Admin Postal Code: 21220
+Admin Country: US
+Admin Phone: +1.8188135300
+Admin Phone Ext:
+Admin Fax:
+Admin Fax Ext:
+Admin Email: domain@exclusivenegotiator.com
+Admin Application Purpose: P3
+Admin Nexus Category: C11
+Registry Tech ID: C0F2BF58D0045496F964DF8FA1E89754E-NSR
+Tech Name: Dennis Maximo
+Tech Organization:
+Tech Street: 942 Ramble Run Road
+Tech Street: Middle River
+Tech Street:
+Tech City: Baltimore
+Tech State/Province: MD
+Tech Postal Code: 21220
+Tech Country: US
+Tech Phone: +1.8188135300
+Tech Phone Ext:
+Tech Fax:
+Tech Fax Ext:
+Tech Email: domain@exclusivenegotiator.com
+Tech Application Purpose: P3
+Tech Nexus Category: C11
+Name Server: ns2.dyna-ns.net
+Name Server: ns1.dyna-ns.net
+DNSSEC: unsigned
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+>>> Last update of WHOIS database: 2024-09-09T22:13:53Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
+
+.US WHOIS Complaint Tool - http://www.whoiscomplaints.us
+Advanced WHOIS Instructions - http://whois.us/help.html
+
+Registry Services, LLC, the Registry Administrator for .US, has collected this information for the WHOIS database through a .US-Accredited Registrar. This information is provided to you for informational purposes only and is designed to assist persons in determining contents of a domain name registration record in the registry database. 
+
+Registry Services, LLC makes this information available to you "as is" and does not guarantee its accuracy. By submitting a WHOIS query, you agree that you will use this data only for lawful purposes and that, under no circumstances will you use this data: 
+
+(1) to allow, enable, or otherwise support the transmission of mass unsolicited, commercial advertising or solicitations via direct mail, electronic mail, or by telephone; 
+(2) in contravention of any applicable data and privacy protection laws; or 
+(3) to enable high volume, automated, electronic processes that apply to the registry (or its systems). 
+
+Compilation, repackaging, dissemination, or other use of the WHOIS database in its entirety, or of a substantial portion thereof, is not allowed without our prior written permission. 
+
+We reserve the right to modify or change these conditions at any time without prior or subsequent notification of any kind. By executing this query, in any manner whatsoever, you agree to abide by these terms. NOTE: FAILURE TO LOCATE A RECORD IN THE WHOIS DATABASE IS NOT INDICATIVE OF THE AVAILABILITY OF A DOMAIN NAME. All domain names are subject to certain additional domain name registration rules. For details, please visit our site at www.whois.us.

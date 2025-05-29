@@ -1,0 +1,39 @@
+{
+    "Domain Name": "trellian.info",
+    "Registry Domain ID": "6c042fc7b2fd45b18133b7a6d525c082-DONUTS",
+    "Registrar URL": "http://www.above.com",
+    "Updated Date": "2024-08-12T02:01:22Z",
+    "Creation Date": "2006-08-18T02:05:16Z",
+    "Expiration Date": "2025-08-18T02:05:16Z",
+    "Registrar": "Above.com Pty Ltd.",
+    "Registrar IANA ID": "940",
+    "Registrar Abuse Contact Email": "abuse@above.com",
+    "Registrar Abuse Contact Phone": "+61.395897946",
+    "Domain Status": [
+      "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+      "renewPeriod https://icann.org/epp#renewPeriod"
+    ],
+    "Registrant Name": "REDACTED FOR PRIVACY",
+    "Registrant Organization": "Above.com Domain Privacy",
+    "Registrant State/Province": "VIC",
+    "Registrant Country": "AU",
+    "Registrant Phone": "REDACTED FOR PRIVACY",
+    "Registrant Email": "Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.",
+    "Admin Name": "REDACTED FOR PRIVACY",
+    "Admin Organization": "REDACTED FOR PRIVACY",
+    "Admin State/Province": "REDACTED FOR PRIVACY",
+    "Admin Country": "REDACTED FOR PRIVACY",
+    "Admin Phone": "REDACTED FOR PRIVACY",
+    "Admin Email": "Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.",
+    "Tech Name": "REDACTED FOR PRIVACY",
+    "Tech Organization": "REDACTED FOR PRIVACY",
+    "Tech State/Province": "REDACTED FOR PRIVACY",
+    "Tech Country": "REDACTED FOR PRIVACY",
+    "Tech Phone": "REDACTED FOR PRIVACY",
+    "Tech Email": "Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.",
+    "Name Server": [
+      "san1.trellian.com",
+      "san2.trellian.com"
+    ],
+    "DNSSEC": "unsigned"
+  }

@@ -1,0 +1,83 @@
+<!doctype html>
+<head>
+<title>Cadia - {% block title %}{% endblock %}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<nav class="navbar bg-success text-white navbar-expand-lg" style="height: 50px; position: relative;" data-bs-theme="dark">
+<div class="container-fluid">
+	<a class="navbar-brand text-white" href="/">
+		<i class="bi bi-gem"></i> cadia
+	</a>
+	{% if search is defined %}
+	<ul class="nav nav-tabs" style="position: absolute; bottom: -1px; left: 110px;">
+		<li class="nav-item">
+			<a class="nav-link {% if request.url_rule.endpoint=='search' %}active{% else %}text-white{% endif %}" href="{{url_for('search', id=search.id)}}">
+				<i class="bi bi-search"></i> Results
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if request.url_rule.endpoint=='edit_search' %}active{% else %}text-white{% endif %}" href="{{url_for('edit_search', id=search.id)}}">
+				<i class="bi bi-pencil"></i> Edit Search
+			</a>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle {% if request.url_rule.endpoint=='chart' %}active{% else %}text-white{% endif %}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+				<i class="bi bi-bar-chart-line"></i> Chart 
+			</a>
+			<ul class="dropdown-menu" style="position: absolute;">
+				<li><a class="dropdown-item" href="/s/{{ search.id }}/chart/ns"><i class="bi bi-bar-chart-line"></i> by NS</a></li>
+				<li><a class="dropdown-item" href="/s/{{ search.id }}/chart/txt"><i class="bi bi-bar-chart-line"></i> by TXT records</a></li>
+				<li><a class="dropdown-item" href="/s/{{ search.id }}/chart/mx"><i class="bi bi-bar-chart-line"></i> by MX records</a></li>
+				<li><a class="dropdown-item" href="/s/{{ search.id }}/chart/addr"><i class="bi bi-bar-chart-line"></i> by IP address</a></li>
+				<li><a class="dropdown-item" href="/s/{{ search.id }}/chart/pm_username"><i class="bi bi-bar-chart-line"></i> by PM username</a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+                       <a class="nav-link text-white" href="/s/{{ search.id }}/refresh"><i class="bi bi-arrow-clockwise"></i> Refresh</a>
+                </li>
+	</ul>
+	{% endif %}
+	<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:absolute; right: 0;">
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="bi bi-info-circle"></i> Examples
+			</a>
+			<ul class="dropdown-menu dropdown-menu-end">
+				<li><a class="dropdown-item" href="/s/2934125975">Above - domains whose nameserver is on abovedomains.com</a></li>
+				<li><a class="dropdown-item" href="/s/3504613797">Bodis - domains whose nameserver is on bodis.com</a></li>
+				<li><a class="dropdown-item" href="/s/2580606407">Sedo - domains whose nameserver is on sedoparking.com</a></li>
+				<li><a class="dropdown-item" href="/s/2128260234">Parkingcrew - domains whose nameserver is on parkingcrew.net</a></li>
+				<li><a class="dropdown-item" href="/s/2451373348">Giantpanda - domains whose nameserver is on giantpanda.com</a></li>
+				<li><a class="dropdown-item" href="/s/2978042759">Smartname - domains whose nameserver is on smartname.com</a></li>
+				<li><a class="dropdown-item" href="/s/2553498221">Parklogic - domains whose nameserver is on parklogic.com</a></li>
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="bi bi-file-spreadsheet"></i> Reports
+			</a>
+			<ul class="dropdown-menu dropdown-menu-end" style="position: absolute;">
+				<li><a class="dropdown-item" href="/errors"><i class="bi bi-file-spreadsheet"></i> Scraper errors</a></li>
+				<li><a class="dropdown-item" href="/stats"><i class="bi bi-bar-chart-line"></i> Statistics</a></li>
+				<li><a class="dropdown-item" href="/report/ns_domain"><i class="bi bi-globe"></i> Name Server Domains</a></li>
+			</ul>
+		</li>
+				<li>
+			<a class="nav-link text-white" href="/import_domain" aria-expanded="false">
+				<i class="bi bi-file-earmark-arrow-down-fill"></i> Import
+			</a>
+		</li>
+	</ul>
+</div>
+</nav>
+<div class="container-fluid">
+	{% block body %}
+	{% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+{% block bottom %}
+{% endblock %}
+</body>

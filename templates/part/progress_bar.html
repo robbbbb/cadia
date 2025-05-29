@@ -1,0 +1,37 @@
+{% set current_progress = progress or 0.0 %}
+
+{% if current_progress < 100 %}
+  <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+    <div class="text-center" style="width: 80%;">
+
+      <div class="progress" style="height: 30px; border-radius: 10px; overflow: hidden;">
+        <div 
+          class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+          role="progressbar"
+          style="width: {{ current_progress }}%;" 
+          aria-valuenow="{{ current_progress }}" 
+          aria-valuemin="0" 
+          aria-valuemax="100">
+          {{ '%.2f' % current_progress }}%
+        </div>
+      </div>
+
+      <div class="mt-2">Loading data...</div>
+    </div>
+  </div>
+{% else %}
+  <!-- Hidden flag that signals polling to stop -->
+  <div id="progress-complete-flag" data-done="true" hidden></div>
+
+  <div class="row m-2 p-2" style="min-height: 200px" hx-get="/s/{{search.id}}/summary" hx-trigger="load">
+    <div class="text-center">
+      <div class="spinner-border text-success" role="status"></div>
+    </div>
+  </div>
+
+  <div hx-get="/s/{{search.id}}/results" hx-trigger="load" id="results">
+    <div class="text-center">
+      <div class="spinner-border text-success" role="status"></div>
+    </div>
+  </div>
+{% endif %}

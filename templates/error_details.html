@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %}errors{% endblock %} {% block body %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Error Details</h1>
+  <div class="row g-4">
+    {% for error_detail in error %}
+    <div class="col-12">
+      <div class="card border-danger">
+        <div class="card-body">
+          <h5 class="card-title text-danger">
+            Domain: {{ error_detail.domain }}
+          </h5>
+          <p class="card-text">
+            <strong>Error:</strong> {{ error_detail.error }}
+          </p>
+          <p class="card-text">
+            <strong>Error Type:</strong> {{ error_detail.error_type }}
+          </p>
+          <pre class="card-text">
+            <strong>Traceback:</strong> {{ error_detail.traceback }}
+          </pre>
+          <p class="card-text">
+            <strong>Scraper:</strong> {{ error_detail.scraper }}
+          </p>
+          <p class="card-text">
+            <strong>File:</strong> {{ error_detail.file }}
+          </p>
+          <p class="card-text">
+            <strong>Line:</strong> {{ error_detail.line }}
+          </p>
+          <p class="card-text">
+            <strong>Topic:</strong> {{ error_detail.topic }}
+          </p>
+          <p class="card-text">
+            <strong>Timestamp:</strong> {{ error_detail.timestamp }}
+          </p>
+          <p class="card-text">
+            <strong>UUID:</strong> {{ error_detail.uuid }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %} {% block bottom %} {% endblock %}

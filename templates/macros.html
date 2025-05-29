@@ -1,0 +1,12 @@
+{% macro filter_badge(col, value, text=value) %}
+<span class="badge bg-light text-dark border me-1 dropdown"><a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-reset text-decoration-none">{{text}}</a>
+  <ul class="dropdown-menu">
+    <li><h6 class="dropdown-header">Options for ({{col}} is {{value}}):</h6></li>
+    <li><a class="dropdown-item" href="#" onclick="add_filter('{{col}}','{{value}}')"><i class="bi bi-funnel me-2"></i> Drill down</a></li>
+    <li><a class="dropdown-item" href="/s/new?col={{col}}&match=exact&value={{value}}" target="_blank"><i class="bi bi-file-earmark-plus me-2"></i> Start a new search</a></li>
+  </ul>
+  </span>
+{% endmacro %}
+{% macro tag_badge(id, label, colour, icon) %}
+<span class="badge me-1" style="color: #{{colour}}; background-color: hsl(from #{{colour}} h 30% 90%); border: 1px solid #{{colour}};"><a href="/tag/{{id}}" class="text-reset text-decoration-none"><i class="bi bi-{{icon}}"></i> {{label}}</a></span>
+{% endmacro %}

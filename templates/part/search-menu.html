@@ -1,0 +1,10 @@
+{% for col, match, value in search.criteria %}
+<!--{{ loop.index0 }}-->
+	<!--<div class="d-inline text-muted">-->
+	<div class="dropdown-item">
+		<a class="text-reset text-decoration-none" href="#">{{ col }} {{ match }} {{ value }} <i class="bi bi-pencil"></i></a>
+<a class="text-reset text-decoration-none" href="#" onclick="document.querySelector('#remove-{{loop.index0}}').submit(); return false"><i class="bi bi-x-lg"></i></a>
+<form id="remove-{{loop.index0}}" action="/s/{{search.id}}/remove-filter/{{loop.index0}}" method="post" style="display:none"></form>
+</div>
+{% endfor %}
+

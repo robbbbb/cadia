@@ -1,0 +1,4 @@
+{% from "macros.html" import filter_badge %}
+{% for row in results %}
+{{ filter_badge(col,row.val) }} {{ row.count }}
+{% endfor %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} Tag {% endblock %}
+{% block body %}
+  <div class="row">
+  <div class="col12">
+	  <p>
+	  <br>
+<span class="badge me-1 fs-1" style="color: #{{tag.colour}}; background-color: hsl(from #{{tag.colour}} h 30% 90%); border: 1px solid #{{tag.colour}};"><a href="/tag/{{tag.id}}" class="text-reset text-decoration-none"><i class="bi bi-{{tag.icon}}"></i> {{tag.name}}</a></span>
+	  </p>
+	  <p>Connected to search #{{tag.search_id}} <a href="/s/{{tag.search_id}}">view</a> | <a href="/s/{{tag.search_id}}/edit">edit</a></p>
+	  <p>Notes:<br>
+	  <textarea>{{tag.notes}}</textarea>
+	  </p>
+	  TODO: options to edit (label, colour, icon), delete...
+
+  </div>
+  </div>
+{% endblock %}
