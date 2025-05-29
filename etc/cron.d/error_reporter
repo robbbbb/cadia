@@ -1,2 +1,0 @@
-# Cadia error_reporter - persistent job
-* * *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=2000 --tag=cadia:error_reporter --warningtime=0 python3 /var/www/cadia.trillion.com/error_reporter.py

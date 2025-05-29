@@ -1,2 +1,0 @@
-# Cadia retries_failed_scrapes - persistent job
-0 0 * * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=8000 --tag=cadia:retries_failed_scrapes --warningtime=0 python3 /var/www/cadia.trillion.com/queue_failed_scrapes.py

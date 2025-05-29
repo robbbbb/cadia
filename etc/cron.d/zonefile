@@ -1,6 +1,0 @@
-# Cadia zone file importer - finds all new zone files and imports them
-# disabled while debugging
-47 */4 *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=8000 --tag=cadia:zonefile -- python3 /var/www/cadia.trillion.com/import_new_zonefiles.py --exclude-tlds=com,net,org
-17 */4 *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=6000 --tag=cadia:zonefile:com -- python3 /var/www/cadia.trillion.com/import_new_zonefiles.py --tld=com
-27 */4 *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=6000 --tag=cadia:zonefile:net -- python3 /var/www/cadia.trillion.com/import_new_zonefiles.py --tld=net
-37 */4 *  * * import runjob --noduplicate --mail=rt-cadia@trellian.com --memory=8000 --tag=cadia:zonefile:org -- python3 /var/www/cadia.trillion.com/import_new_zonefiles.py --tld=org
